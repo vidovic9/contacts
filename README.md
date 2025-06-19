@@ -18,5 +18,5 @@ Supports basic CRUD operations and search functionality.
 ## Setup
 1. Clone the repository
 2. Set up your MySQL database
-3. Configure database connection in `config.py`
+3. Configure database connection in `.env`
 4. Run the app using: `python app.py`
