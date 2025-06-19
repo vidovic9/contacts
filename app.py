@@ -30,7 +30,7 @@ def test_db():
 
 @app.route("/contacts")
 def contacts():
-    cur = mysql.connect.cursor()
+    cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM contacts")
     data = cur.fetchall()
     cur.close()
@@ -43,7 +43,7 @@ def add_contact():
         email = request.form['email']
         phone = request.form['phone']
 
-        cur = mysql.connect.cursor()
+        cur = mysql.connection.cursor()
         cur.execute("INSERT INTO contacts (name,email,phone) VALUES (%s,%s,%s)", (name,email,phone))
         mysql.connection.commit()
         cur.close()
@@ -51,6 +51,14 @@ def add_contact():
         return redirect(url_for('contacts'))
     
     return render_template("add_contact.html")
+
+@app.route("/delete-contact/<int:id>")
+def delete_contact(id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM contacts WHERE id = %s", (id,))
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('contacts'))
 
 
 if __name__ == "__main__":

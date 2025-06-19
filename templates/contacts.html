@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Contact List</title>
-    </head>
-    <body>
-        <h1>All contacts</h1>
-        {% if contacts %}
-        <table border="1"cellpading="5">
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Email</td>
-                <td>Phone</td>
-            </tr>
-            {% for contact in contacts %}
-            <tr>
-                <td>{{ contact[0] }}</td>
-                <td>{{ contact[1] }}</td>
-                <td>{{ contact[2] }}</td>
-                <td>{{ contact[3] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p>No contacts found</p>
-        {% endif %}
-    </body>
+<head>
+    <title>All Contacts</title>
+</head>
+<body>
+    <h1>Contact List</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact[0] }}</td>
+            <td>{{ contact[1] }}</td>
+            <td>{{ contact[2] }}</td>
+            <td>{{ contact[3] }}</td>
+            <td><a href="/delete-contact/{{ contact[0] }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/add-contact">➕ Add New Contact</a>
+</body>
 </html>
