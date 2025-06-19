@@ -60,6 +60,22 @@ def delete_contact(id):
     cur.close()
     return redirect(url_for('contacts'))
 
+@app.route("/edit-contact/<int:id>", methods=['GET','POST'])
+def edit_contact(id):
+    cur = mysql.connection.cursor()
 
+    if request.method == "POST":
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        cur.execute("UPDATE contacts SET name=%s, email=%s, phone=%s WHERE id=%s", (name,email,phone,id))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('contacts'))
+    else:
+        cur.execute("SELECT * FROM contacts WHERE id = %s", (id,))
+        contact = cur.fetchone()
+        cur.close()
+        return render_template("edit_contact.html", contact=contact)
 if __name__ == "__main__":
     app.run(debug=True)

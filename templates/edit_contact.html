@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Contact</title>
+    </head>
+    <body>
+        <h1>Edit Contact</h1>
+        <form method="POST">
+            <label>Name :</label><br>
+            <input type="text" name="name" value="{{ contact[1] }}" required><br><br>
+
+            <label>Email :</label><br>
+            <input type="email" name="email" value="{{ contact[2] }}"><br><br>
+
+            <label>Phone :</label><br>
+            <input type="text" name="phone" value="{{ contact[3] }}"><br><br>
+
+            <input type="submit" value="Update Contact">
+        </form>
+    </body>
+</html>
