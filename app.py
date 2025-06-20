@@ -30,11 +30,18 @@ def test_db():
 
 @app.route("/contacts")
 def contacts():
+    query = request.args.get("query")
+
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM contacts")
+    
+    if query:
+        cur.execute("SELECT * FROM contacts WHERE name LIKE %s", ('%' + query + '%',))
+    else:
+        cur.execute("SELECT * FROM contacts")
+        
     data = cur.fetchall()
     cur.close()
-    return render_template("contacts.html",contacts=data)
+    return render_template("contacts.html", contacts=data)
 
 @app.route("/add-contact",methods=['GET','POST'])
 def add_contact():

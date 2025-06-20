@@ -2,8 +2,14 @@
 <html>
 <head>
     <title>All Contacts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <h2>Search Contacts</h2>
+    <form method="GET" action="/contacts">
+        <input type="text" name="query" placeholder="Search by name">
+        <input type="submit" value="Search">
+    </form>
     <h1>Contact List</h1>
     <table border="1" cellpadding="10">
         <tr>
